@@ -136,7 +136,7 @@
                 }while(s>9)
                     check2=false
                 for(var i = 0 ; i< summ.length;i++){
-                     if(s!=summ[i]){
+                     if(s==parseInt(summ[i])){
                          check2 = true
                      }
                     
