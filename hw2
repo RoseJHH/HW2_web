@@ -1,0 +1,184 @@
+<html>
+<head>
+    <title>Car Register</title>  
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    
+    <link href="bootstrap-responsive.css" rel="stylesheet" type="text/css">
+    <link href="bootstrap-responsive.min.css" rel="stylesheet" type="text/css">
+    <link href="bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="style.css" rel="stylesheet" type="text/css">
+    
+</head>
+
+<body>
+
+    <div class="container">
+  
+        <h3 style="padding-left: 60;padding-bottom: 10">Car Registration Plate Generator</h3>
+
+          <div class="row" style="text-align: left">
+                <div class="col ">
+                       <p style="padding-left: 100">1. Unwanted Number in License Plate</p>
+                    <form style="padding-left: 160">
+                        
+                                <input type="checkbox" class="select" value="0">&nbsp; 0<span id="space"></span>
+                                <input type="checkbox" class="select" value="5">&nbsp; 5<br>
+                                
+         
+                                <input type="checkbox" class="select" value="1">&nbsp; 1<span id="space"></span>
+                                <input type="checkbox" class="select" value="6">&nbsp; 6<br>
+                            
+                                <input type="checkbox" class="select" value="2">&nbsp; 2<span id="space"></span>
+                                <input type="checkbox" class="select" value="7">&nbsp; 7<br>
+                            
+                                <input type="checkbox" class="select" value="3">&nbsp; 3<span id="space"></span>
+                                <input type="checkbox" class="select" value="8">&nbsp; 8<br>
+                          
+                                <input type="checkbox" class="select" value="4">&nbsp; 4<span id="space"></span>
+                                <input type="checkbox" class="select" value="9">&nbsp; 9<br>
+                            
+                 
+                    </form>
+                    <p style="padding-left: 100">2. Unwanted summation of all digits</p>
+                    <form style="padding-left: 160">
+                        
+                                <input type="checkbox" class="choose" value="0">&nbsp; 0<span id="space"></span>
+                                <input type="checkbox" class="choose" value="5">&nbsp; 5<br>
+                                
+         
+                                <input type="checkbox" class="choose" value="1">&nbsp; 1<span id="space"></span>
+                                <input type="checkbox" class="choose" value="6">&nbsp; 6<br>
+                            
+                                <input type="checkbox" class="choose" value="2">&nbsp; 2<span id="space"></span>
+                                <input type="checkbox" class="choose" value="7">&nbsp; 7<br>
+                            
+                                <input type="checkbox" class="choose" value="3">&nbsp; 3<span id="space"></span>
+                                <input type="checkbox" class="choose" value="8">&nbsp; 8<br>
+                          
+                                <input type="checkbox" class="choose" value="4">&nbsp; 4<span id="space"></span>
+                                <input type="checkbox" class="choose" value="9">&nbsp; 9<br><br><br>
+                            
+                            <button onclick="generate()" type="button" class="btn btn" style="margin-left:30">Generate</button>
+                    </form>
+                </div>
+              <div class="col" style="border-left-style: solid;border-left-width: 1;border-left-color: darkgray">
+                <p style="padding-left: 60">Output</p>
+                  <div id = "output"></div>
+                  
+              </div>
+              
+        </div>
+
+
+         
+    </div>
+    
+    <script>
+        
+        var number=[]
+        function generate(){
+            var box = document.querySelectorAll('.select')
+
+            box = Array.from(box)
+           //console.log(box)
+            var checked = box.filter(function(item){
+                return item.checked
+            })
+            
+            var box2 = document.querySelectorAll('.choose')
+            box2 = Array.from(box2)
+             var summ = box2.filter(function(item){
+                return item.checked
+            })
+             
+             for(var i =0 ; i < summ.length;i++){
+                 console.log(summ[i].value)
+             }
+    //
+
+            var checkif
+            var number=[]
+            for(var i = 0 ; i<10000 ;i++){
+         
+                str = i+"";
+                //console.log(str);
+                checkif = false
+                for(var j = 0 ; j<checked.length;j++){
+
+                    if(str.indexOf(checked[j].value)!=-1){
+                        checkif = true
+                    }
+                }
+                if(checkif ==false){
+                    number.push(i)
+                }
+            } 
+//            createTable(number)
+   
+     ////////////////////////////////////////////////      
+            var result=[]
+            var num
+            var check2
+            var s
+            var arr
+            for(var k = 0 ; k<number.length;k++){
+                
+                str = k+""
+                
+                do{
+                    arr = str.split();
+                    s = 0
+                    for(var j = 0;j<arr.length;j++){
+                        s+=parseInt(arr[j]);
+                    }
+                }while(s>9)
+                    check2=false
+                for(var i = 0 ; i< summ.length;i++){
+                     if(s!=summ[i]){
+                         check2 = true
+                     }
+                    
+                 }
+            }
+            createTable(result)
+        }
+
+            
+        
+        function createTable(data){
+            var table =document.createElement('table')
+            var output = document.getElementById('output')
+            output.innerHTML =""
+            table.className = 'table'
+
+            //tr,td
+            var tr ,td
+
+            var k=0
+            for(var i = 0 ;i < data.length ;i++){
+                tr = document.createElement('tr')
+                
+                for(var j = 0 ; j< 5;j++){
+                    td = document.createElement('td')
+                if(data[k]==undefined){
+                    break;
+                }
+                    td.innerHTML= data[k++]
+                    tr.appendChild(td)
+                }
+                table.appendChild(tr)
+            }
+        
+            output.appendChild(table)
+            
+        }
+        
+        
+        
+    </script>
+    
+    
+</body>
+</html>
